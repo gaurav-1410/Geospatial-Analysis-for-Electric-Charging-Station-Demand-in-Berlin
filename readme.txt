@@ -29,7 +29,7 @@ spyder
 streamlit run main.py
 
 
-# ------------------------Project Description------------------------------
+# ------------------------Project Description-----------------------------
 
 Group No.: 3
 Group Member Names
