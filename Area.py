@@ -1,17 +1,17 @@
 class Area:
     pincode
-    ChargingStation[] chargingStations
+    chargingStations = []
+    
     def __init__(self, pincode):
         self.pincode = pincode
-        self.chargingStations = []
     
     def addChargingStation(self, chargingStation):
         if chargingStation.pincode == self.pincode:
             self.chargingStations.append(chargingStation)
-        else
+        else:
             print("Charging Station does not belong to this area")
 
-    def findAvailableChargingStation(self):
+    def getAvailableStations(self):
         resultStations = []
         for chargingStation in self.chargingStations:
             if chargingStation.checkAvailability():
