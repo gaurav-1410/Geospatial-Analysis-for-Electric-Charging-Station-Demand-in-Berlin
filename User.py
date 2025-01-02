@@ -13,7 +13,7 @@ class User:
     
     def giveFeedback(self, chargingStation):
         feedback = Feedback()
-        feedback.chargingStationId = chargingStation.get_station_id()
+        feedback.setChargingStationId(chargingStation.get_station_id())
 
         while True:
             rating = int(input("Enter your rating from 1 to 5: "))
