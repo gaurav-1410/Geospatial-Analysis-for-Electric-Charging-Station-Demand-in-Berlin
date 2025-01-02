@@ -5,7 +5,6 @@ chargingStationId
 def getReportId(self):
     return self.reportId
 
-
 def getReportComment(self):
     return
 

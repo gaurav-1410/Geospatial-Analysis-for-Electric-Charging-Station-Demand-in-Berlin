@@ -20,4 +20,7 @@ def setRating(self, rating):
 
 def setComment(self, comment):
     self.comment = comment
+    
+def setChargeStationId(self, chargingStationId):
+    self.chargingStationId = chargingStationId
 

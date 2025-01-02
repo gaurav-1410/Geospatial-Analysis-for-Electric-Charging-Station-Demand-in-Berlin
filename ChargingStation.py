@@ -34,10 +34,6 @@ class ChargingStation:
     
     def getDemand(self):
         return demand
-        
-    def addReport(self):
-        report = input("Enter your report: ")
-        reports.append(report)
 
     def addFeedback(self, feedback):
         feedbacks.append(feedback)
