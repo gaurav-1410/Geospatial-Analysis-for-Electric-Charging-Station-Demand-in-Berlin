@@ -18,7 +18,7 @@ firebase_creds = st.secrets["firebase"]
 cred = credentials.Certificate({
     "type": "service_account",
     "project_id": firebase_creds["project_id"],
-    "private_key_id": "e2c5ce6dd67de05d5add4bcc2f073af74e937e90",  # You might need to extract this from your firebase_creds
+    "private_key_id": firebase_creds["private_key_id"],  # You might need to extract this from your firebase_creds
     "private_key": firebase_creds["private_key"],
     "client_email": firebase_creds["client_email"],
     "client_id": firebase_creds["client_id"],
