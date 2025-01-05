@@ -11,4 +11,4 @@ streamlit
 streamlit_folium
 folium
 firebase-admin
-dotenv
+python-dotenv
