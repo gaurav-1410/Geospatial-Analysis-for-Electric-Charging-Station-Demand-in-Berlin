@@ -9,5 +9,8 @@ plotly
 dash
 streamlit
 streamlit_folium
-Folium
+folium
 firebase-admin
+dotenv
+os
+warnings
