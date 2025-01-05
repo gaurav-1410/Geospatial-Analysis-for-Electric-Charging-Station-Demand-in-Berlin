@@ -26,15 +26,12 @@ class DataService:
         geo_data['plz'] = geo_data['PLZ'].astype(int)
         return data, geo_data
 
+
+# export FIREBASE_CREDENTIALS_PATH="/path/to/your/firebase_credentials.json"
+
 class FirebaseService:
     def __init__(self, cred_path):
-        # if not firebase_admin._apps:
-        #     cred = credentials.Certificate(cred_path)
-        #     firebase_admin.initialize_app(cred)
-        # self.db = firestore.client()
-
-        cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
-        if cred_path and not firebase_admin._apps:
+        if not firebase_admin._apps:
             cred = credentials.Certificate(cred_path)
             firebase_admin.initialize_app(cred)
         self.db = firestore.client()
