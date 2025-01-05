@@ -11,14 +11,14 @@ import os
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
-class FirebaseService:
-    def __init__(self):
-        load_dotenv()
-        cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
-        if cred_path and not firebase_admin._apps:
-            cred = credentials.Certificate(cred_path)
-            firebase_admin.initialize_app(cred)
-        self.db = firestore.client()
+# class FirebaseService:
+#     def __init__(self):
+#         load_dotenv()
+#         cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
+#         if cred_path and not firebase_admin._apps:
+#             cred = credentials.Certificate(cred_path)
+#             firebase_admin.initialize_app(cred)
+#         self.db = firestore.client()
 
 class DataService:
     @st.cache_data
@@ -29,11 +29,11 @@ class DataService:
         return data, geo_data
 
 
-# export FIREBASE_CREDENTIALS_PATH="/path/to/your/firebase_credentials.json"
-
 class FirebaseService:
-    def __init__(self, cred_path):
-        if not firebase_admin._apps:
+    def __init__(self):
+        load_dotenv()
+        cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
+        if cred_path and not firebase_admin._apps:
             cred = credentials.Certificate(cred_path)
             firebase_admin.initialize_app(cred)
         self.db = firestore.client()
@@ -93,7 +93,7 @@ class MapService:
 
 # Initialize services
 data_service = DataService()
-firebase_service = FirebaseService("firebase_credentials.json")
+firebase_service = FirebaseService()
 map_service = MapService()
 
 # Load data
