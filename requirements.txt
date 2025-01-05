@@ -12,5 +12,3 @@ streamlit_folium
 folium
 firebase-admin
 dotenv
-os
-warnings
