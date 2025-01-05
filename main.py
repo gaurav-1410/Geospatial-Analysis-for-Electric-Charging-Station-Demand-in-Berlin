@@ -6,12 +6,14 @@ from streamlit_folium import st_folium
 from branca.colormap import LinearColormap
 import firebase_admin
 from firebase_admin import credentials, firestore
+from dotenv import load_dotenv
 import os
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 
 class FirebaseService:
     def __init__(self):
+        load_dotenv()
         cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
         if cred_path and not firebase_admin._apps:
             cred = credentials.Certificate(cred_path)
