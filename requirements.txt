@@ -10,3 +10,4 @@ dash
 streamlit
 streamlit_folium
 Folium
+firebase-admin
