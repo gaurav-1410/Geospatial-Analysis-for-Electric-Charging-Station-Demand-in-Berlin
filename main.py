@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 
 
 firebase_creds = st.secrets["firebase"]
-if not firebase_admin._apps:  # Ensure Firebase is not initialized multiple times
+if not firebase_admin._apps:  
     cred = credentials.Certificate(dict(firebase_creds))
     firebase_admin.initialize_app(cred)
 
