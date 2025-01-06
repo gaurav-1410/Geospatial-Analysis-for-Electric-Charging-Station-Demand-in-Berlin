@@ -27,7 +27,7 @@ firebase_creds = st.secrets["firebase"]
 #     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
 #     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-yn14k%40berlin-feedback.iam.gserviceaccount.com"
 # })
-
+cred = credentials.Certificate(firebase_creds)
 firebase_admin.initialize_app(cred)
 
 # class FirebaseService:
