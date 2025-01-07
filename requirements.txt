@@ -12,3 +12,4 @@ streamlit_folium
 folium
 firebase-admin
 python-dotenv
+geopy
