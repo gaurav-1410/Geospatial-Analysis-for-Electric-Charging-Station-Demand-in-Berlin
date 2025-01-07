@@ -1,8 +1,8 @@
-# imports
 import streamlit as st
 import pandas as pd
 import geopandas as gpd
 import folium
+import geopy.distance
 from streamlit_folium import st_folium
 from branca.colormap import LinearColormap
 import firebase_admin
@@ -88,6 +88,16 @@ class MapService:
         ).add_to(m)
         color_map.add_to(m)
         return m
+    
+    @staticmethod
+    def find_nearby_stations(data, target_lat, target_lon, radius_km=2):
+        def calculate_distance(row):
+            return geopy.distance.geodesic(
+                (row["Latitude"], row["Longitude"]), (target_lat, target_lon)
+            ).km
+
+        data["Distance"] = data.apply(calculate_distance, axis=1)
+        return data[data["Distance"] <= radius_km]
 
 
 # Initialize services
@@ -137,20 +147,55 @@ else:
     st.info("Adjust filters or enter a valid pincode.")
 
 # Feedback section
-st.header("Provide Feedback for Charging Stations")
+
 if search_pincode:
-    with st.form("feedback_form"):
-        user_id = st.text_input("Enter your UserID:")
-        name = st.text_input("Enter your Name:")
-        rating = st.slider("Rate the Charging Stations (1-5):", 1, 5, 3)
-        feedback_text = st.text_area("Enter your feedback for the selected pincode:")
-        submit_button = st.form_submit_button("Submit Feedback")
-        if submit_button:
-            if not user_id.strip() or not name.strip():
-                st.warning("UserID and Name are required.")
-            elif not feedback_text.strip():
-                st.warning("Feedback cannot be empty.")
-            else:
-                firebase_service.save_feedback(search_pincode, user_id.strip(), name.strip(), rating, feedback_text.strip())
+    # Get the latitude and longitude of the selected pincode
+    try:
+        search_pincode = int(search_pincode)
+        filtered_data = geo_merged[geo_merged['plz'] == search_pincode]
+        if not filtered_data.empty:
+            target_lat = filtered_data.iloc[0]["Latitude"]
+            target_lon = filtered_data.iloc[0]["Longitude"]
+
+            # Find nearby charging stations
+            nearby_stations = map_service.find_nearby_stations(data, target_lat, target_lon)
+
+            # Display map with markers for nearby charging stations
+            m = folium.Map(location=[target_lat, target_lon], zoom_start=13)
+            for _, station in nearby_stations.iterrows():
+                folium.Marker(
+                    location=[station["Latitude"], station["Longitude"]],
+                    popup=f"Station: {station['plz']}<br>Distance: {station['Distance']:.2f} km",
+                    icon=folium.Icon(color="green", icon="bolt", prefix="fa"),
+                ).add_to(m)
+
+            # Add the map to Streamlit
+            st_folium(m, width=700, height=500)
+
+            # Feedback form
+            st.subheader(f"Feedback for Charging Stations at {search_pincode}")
+            with st.form("feedback_form"):
+                user_id = st.text_input("Enter your UserID:")
+                name = st.text_input("Enter your Name:")
+                rating = st.slider("Rate the Charging Station (1-5):", 1, 5, 3)
+                feedback_text = st.text_area("Enter your feedback for the selected station:")
+                submit_button = st.form_submit_button("Submit Feedback")
+                if submit_button:
+                    if not user_id.strip() or not name.strip():
+                        st.warning("UserID and Name are required.")
+                    elif not feedback_text.strip():
+                        st.warning("Feedback cannot be empty.")
+                    else:
+                        firebase_service.save_feedback(
+                            pincode=search_pincode,
+                            user_id=user_id.strip(),
+                            name=name.strip(),
+                            rating=rating,
+                            feedback=feedback_text.strip(),
+                        )
+        else:
+            st.warning(f"No data found for Pincode: {search_pincode}")
+    except ValueError:
+        st.error("Please enter a valid numeric pincode.")
 else:
-    st.info("Please select a pincode to provide feedback.")
+    st.info("Please select a pincode to view charging stations and provide feedback.")
