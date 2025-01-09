@@ -202,12 +202,3 @@ def make_streamlit_electric_Charging_resid(dfr1, dfr2):
     color_map.add_to(m)
     
     folium_static(m, width=800, height=600)
-    
-    
-
-
-
-
-
-
-

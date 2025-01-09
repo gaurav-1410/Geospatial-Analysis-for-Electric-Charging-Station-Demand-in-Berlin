@@ -9,4 +9,7 @@ plotly
 dash
 streamlit
 streamlit_folium
-Folium
+folium
+firebase-admin
+python-dotenv
+geopy
