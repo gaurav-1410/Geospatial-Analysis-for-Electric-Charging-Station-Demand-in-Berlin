@@ -3,9 +3,9 @@ from streamlit import cache_data
 import streamlit as st
 
 class DataService:
-    @staticmethod
+    # @staticmethod
     @st.cache_data
-    def load_data():
+    def load_data(self):
         data = pd.read_csv("../datasets/processed_data.csv")
         data.rename(columns={"Breitengrad": "Latitude", "Längengrad": "Longitude"}, inplace=True)
         geo_data = pd.read_csv("../datasets/geodata_berlin_plz.csv", delimiter=';')
