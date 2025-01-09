@@ -7,7 +7,7 @@ import streamlit as st
 class FirebaseService:
     def __init__(self):
         load_dotenv()
-        cred_path = os.getenv('../FIREBASE_CREDENTIALS_PATH')
+        cred_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
         if cred_path and not firebase_admin._apps:
             cred = credentials.Certificate(cred_path)
             firebase_admin.initialize_app(cred)
