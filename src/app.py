@@ -67,9 +67,6 @@ if filtered_data is not None and not filtered_data.empty:
     map_ = map_service.create_map(selected_layer, filtered_data, intervals)
     st_folium(map_, width=700, height=500)
 else:
-<<<<<<< HEAD
-    st.info("Adjust filters or enter a valid pincode.")
-=======
     st.info("Adjust filters or enter a valid pincode.")
 
 # Feedback section
@@ -124,4 +121,3 @@ if search_pincode:
         st.error("Please enter a valid numeric pincode.")
 else:
     st.info("Please select a pincode to view charging stations and provide feedback.")
->>>>>>> 9b18e5563e9fc54707ce883ce1fe0a8ebb5100d0

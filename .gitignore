@@ -1,3 +1,39 @@
-.venv/
+# .venv/
+# __pycache__/
+# .env
+# *.logfirebase_credentials.json
+# 
+# 
+
+# Virtual Environment
+venv/
+
+# Python Bytecode Files
 __pycache__/
+*.py[cod]
+*.pyo
+
+# Environment Files
+.env
+.env.*
+
+# Log Files
 *.log
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor Configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Firebase Cred File
+firebase_credentials.json
+
+.streamlit/
