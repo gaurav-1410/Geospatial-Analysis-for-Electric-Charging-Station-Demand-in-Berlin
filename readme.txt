@@ -45,4 +45,4 @@ Key Features:
 
 1) Analysis of geospatial datasets for Berlin.
 2) Identification of high-demand areas for electric charging infrastructure.
-3) Use of advanced data visualization and mapping tools..
+3) Use of advanced data visualization and mapping tools.
