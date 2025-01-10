@@ -39,7 +39,7 @@ class User:
 
     def writeReport(self, chargingStation):
         report = Report()
-        report.chargingStationId = chargingStation.get_station_id()
+        report.setChargingStationId(chargingStation.get_station_id())
         report.setReportComment(input("Enter your report: "))
         chargingStation.addReport(report)
         reports.append(report)
