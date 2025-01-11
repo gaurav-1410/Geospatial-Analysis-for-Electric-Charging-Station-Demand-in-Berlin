@@ -55,7 +55,7 @@ class MapService:
 
     @staticmethod
     def organize_stations_by_area(data):
-        from Area import Area
+        from area import Area
         areas = {}
 
         for _, row in data.iterrows():
