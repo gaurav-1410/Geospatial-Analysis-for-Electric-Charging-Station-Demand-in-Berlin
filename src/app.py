@@ -1,7 +1,7 @@
 import streamlit as st
 import folium
 from data_service import DataService
-from Feedback import FeedbackService
+from feedback import FeedbackService
 from map_service import MapService
 import geopandas as gpd
 import pandas as pd
