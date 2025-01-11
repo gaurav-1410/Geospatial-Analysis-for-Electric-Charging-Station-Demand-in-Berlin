@@ -53,15 +53,21 @@ class MapService:
 
     @staticmethod
     def create_map(layer, gdf, intervals):
+        # Determine the column to visualize
         col = "Einwohner" if layer == "Residents" else "ChargingStations"
+
+        # Create a color map
         color_map = LinearColormap(
-            colors=["yellow", "red"],
+            colors=["yellow", "orange", "red"],
             vmin=gdf[col].min(),
             vmax=gdf[col].max(),
-            caption=layer,
+            caption=layer
         ).to_step(n=intervals)
 
+        # Initialize a folium map
         m = folium.Map(location=[52.52, 13.42], zoom_start=10)
+
+        # Add GeoJSON layer for choropleth visualization
         folium.GeoJson(
             gdf,
             style_function=lambda feature: {
@@ -75,7 +81,10 @@ class MapService:
                 aliases=["Pincode", layer],
             ),
         ).add_to(m)
+
+        # Add the color map legend
         color_map.add_to(m)
+
         return m
 
     @staticmethod
