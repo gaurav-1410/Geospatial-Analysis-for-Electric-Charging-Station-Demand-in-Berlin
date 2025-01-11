@@ -1,7 +1,7 @@
 import streamlit as st
 import folium
 from data_service import DataService
-from firebase_service import FirebaseService
+from Feedback import FeedbackService
 from map_service import MapService
 import geopandas as gpd
 import pandas as pd
@@ -24,7 +24,7 @@ st.markdown(
 
 # Initialize services
 data_service = DataService()
-firebase_service = FirebaseService()
+feedback_service = FeedbackService()
 map_service = MapService()
 
 # Load data
@@ -35,7 +35,9 @@ geo_merged = gpd.GeoDataFrame(
 )
 geo_merged.set_crs("EPSG:4326", inplace=True)
 
-pincode_suggestions = geo_merged['plz'].dropna().unique().tolist()
+# Organize charging stations into areas by postal code
+areas = map_service.organize_stations_by_area(data)
+pincode_suggestions = areas.keys()
 
 # Sidebar UI
 selected_layer = st.sidebar.radio("Select Search by", ("Residents", "Charging Stations"))
@@ -43,7 +45,7 @@ intervals = st.sidebar.slider("Number of Legend Intervals", 3, 10, 5)
 
 search_pincode = st.sidebar.selectbox(
     "Search by Pincode (e.g., 10115):",
-    options=[""] + sorted(map(str, pincode_suggestions)),
+    options=[""] + sorted(map(str, map(int, pincode_suggestions))),  # Convert to int then to str
     format_func=lambda x: x if x else "Enter or select a Pincode"
 )
 
@@ -51,28 +53,16 @@ search_pincode = st.sidebar.selectbox(
 st.title("⚡ Berlin Electric Charging Station Demand")
 st.write("Visualize demand for electric vehicle charging stations in Berlin.")
 
-filtered_data = geo_merged
-if search_pincode:
-    try:
-        search_pincode = int(search_pincode)
-        filtered_data = geo_merged[geo_merged['plz'] == search_pincode]
-        if filtered_data.empty:
-            st.warning(f"No data found for Pincode: {search_pincode}")
-            filtered_data = None
-    except ValueError:
-        st.error("Please enter a valid numeric pincode.")
-        filtered_data = None
-
-if filtered_data is not None and not filtered_data.empty:
-    map_ = map_service.create_map(selected_layer, filtered_data, intervals)
+if not search_pincode:
+    st.info("Explore the map below or search by entering a pincode.")
+    map_ = map_service.create_map(selected_layer, geo_merged, intervals)
     st_folium(map_, width=700, height=500)
 else:
-    st.info("Adjust filters or enter a valid pincode.")
-
-# Feedback section
-if search_pincode:
     try:
-        search_pincode = int(search_pincode)
+        # Safely convert search_pincode to an integer
+        search_pincode = int(float(search_pincode))  # Handles cases like '10117.0'
+
+        # Filter data by pincode
         filtered_data = geo_merged[geo_merged['plz'] == search_pincode]
         if not filtered_data.empty:
             target_lat = filtered_data.iloc[0]["Latitude"]
@@ -108,16 +98,27 @@ if search_pincode:
                     elif not feedback_text.strip():
                         st.warning("Feedback cannot be empty.")
                     else:
-                        firebase_service.save_feedback(
-                            pincode=search_pincode,
+                        feedback_service.add_feedback(
+                            station_id=search_pincode,
                             user_id=user_id.strip(),
                             name=name.strip(),
                             rating=rating,
-                            feedback=feedback_text.strip(),
+                            feedback_text=feedback_text.strip(),
                         )
+                        st.success(f"Thank you for your feedback, {name}!")
+
+            # Display existing feedback for the station
+            st.subheader(f"Feedback for Station {search_pincode}")
+            feedbacks = feedback_service.get_feedbacks_for_station(search_pincode)
+            if feedbacks:
+                for feedback in feedbacks:
+                    st.write(f"User: {feedback['name']} ({feedback['user_id']})")
+                    st.write(f"Rating: {feedback['rating']}")
+                    st.write(f"Feedback: {feedback['feedback']}")
+                    st.write("---")
+            else:
+                st.write("No feedback available for this station.")
         else:
             st.warning(f"No data found for Pincode: {search_pincode}")
     except ValueError:
-        st.error("Please enter a valid numeric pincode.")
-else:
-    st.info("Please select a pincode to view charging stations and provide feedback.")
+        st.error("Invalid Pincode. Please enter a numeric value.")
