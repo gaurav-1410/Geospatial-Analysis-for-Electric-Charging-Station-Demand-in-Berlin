@@ -3,13 +3,13 @@ import sys
 import os
 from unittest import mock
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
-from data_service import DataService
+from src.data_service import DataService
 
 # Mock dataset paths
 @pytest.fixture
 def mock_dataset_path():
     # Mocking the behavior of the load_data method
-    with mock.patch('data_service.DataService.load_data', return_value=(["mocked_data"], ["mocked_geo_data"])):
+    with mock.patch('src.data_service.DataService.load_data', return_value=(["mocked_data"], ["mocked_geo_data"])):
         yield
 
 def test_load_data(mock_dataset_path):
