@@ -36,6 +36,7 @@ Group Member Names
 1) Gaurav Pandey
 2) Giorgio Sidari
 3) Mehmood Absar
+4) Greeshma Vishnu
 
 Electric mobility plays a crucial role in reducing greenhouse gas emissions. While the adoption of electric vehicles (EVs) has surged in recent years, the limited availability of charging infrastructure poses a significant challenge. This project leverages geospatial data and visualization techniques to analyze the demand for additional electric charging stations in Berlin.
 
