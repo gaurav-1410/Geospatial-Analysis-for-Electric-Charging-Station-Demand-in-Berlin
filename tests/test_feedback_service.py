@@ -2,7 +2,7 @@ import pytest
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
-from feedback import FeedbackService
+from src.feedback import FeedbackService
 
 @pytest.fixture
 def feedback_service():
