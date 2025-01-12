@@ -1,8 +1,5 @@
-from map_service import MapService
 class Area:
-    # postal_code
-    # stations = []
-    
+
     def __init__(self, postal_code):
         self.postal_code = postal_code
         self.stations = []
