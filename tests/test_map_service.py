@@ -5,8 +5,8 @@ import os
 from shapely.geometry import Point
 import geopandas as gpd
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
-from map_service import MapService
-from chargingstation import ChargingStation
+from src.map_service import MapService
+from src.charging_station import ChargingStation
 
 def test_create_map():
     # Create a GeoDataFrame with geometries and set a CRS

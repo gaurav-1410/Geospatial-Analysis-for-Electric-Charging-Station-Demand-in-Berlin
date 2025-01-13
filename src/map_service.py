@@ -1,6 +1,6 @@
 import folium
 from branca.colormap import LinearColormap
-from chargingstation import ChargingStation
+from charging_station import ChargingStation
 import geopy.distance
 import pandas as pd
 
