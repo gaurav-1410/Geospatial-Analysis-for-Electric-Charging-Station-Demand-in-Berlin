@@ -22,3 +22,9 @@ def test_find_station_by_id():
     area.addChargingStation(station)
     result = area.find_station_by_id("001")
     assert result == station, "Station ID not found correctly"
+
+def test_find_station_by_id_not_found():
+    area = Area("10115")
+    # Finding a station that doesn't exist
+    result = area.find_station_by_id("999")
+    assert result is None, "The result should be None when the station is not found"

@@ -41,3 +41,27 @@ def test_organize_stations_by_area():
     areas = MapService.organize_stations_by_area(data)
     assert 10115 in areas, "Area organization failed"
     assert len(areas[10115].stations) == 2, "Station count mismatch"
+
+def test_find_area_by_pincode():
+    data = pd.DataFrame({
+        "plz": [10115, 10115, 10117],
+        "Latitude": [52.5200, 52.5250, 52.5300],
+        "Longitude": [13.4050, 13.4100, 13.4200]
+    })
+    
+    areas = MapService.organize_stations_by_area(data)
+
+    # Test with a valid pincode that exists in the areas dictionary (10115)
+    area = MapService.find_area_by_pincode(areas, 10115)
+    assert area is not None, "Area should be found for pincode 10115"
+    assert len(area.stations) == 2, "Area should contain two stations"
+
+    # Test with an invalid pincode that does not exist in the areas dictionary (99999)
+    area = MapService.find_area_by_pincode(areas, 99999)
+    assert area is None, "Area should be None for pincode 99999"
+    
+    # Test with another valid pincode (10117) to ensure multiple areas work
+    area = MapService.find_area_by_pincode(areas, 10117)
+    assert area is not None, "Area should be found for pincode 10117"
+    assert len(area.stations) == 1, "Area should contain one station"
+
