@@ -15,3 +15,9 @@ def test_add_feedback():
     station = ChargingStation("001", "10115", 52.5200, 13.4050)
     station.addFeedback({"user": "user123", "feedback": "Great station!"})
     assert len(station.feedbacks) == 1, "Feedback was not added"
+
+def test_get_station_id():
+    station = ChargingStation("001", "10115", 52.5200, 13.4050)
+    # Testing the get_station_id method
+    station_id = station.get_station_id()
+    assert station_id == "001", "The station ID returned does not match the expected value"
