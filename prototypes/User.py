@@ -32,7 +32,7 @@ class User:
                 break
             else:
                 print("Invalid input")
-        chargingStation.addFeedback(feedback)
+        chargingStation.add_feedback(feedback)
         feedbacks.append(feedback)
     
 
