@@ -1,17 +1,17 @@
 from typing import List
 
 class ChargingStation:
-    def __init__(self, station_id: str, postal_code: str, latitude: float, longitude: float) -> None:
+    def __init__(self, station_id: str, pincode: str, latitude: float, longitude: float) -> None:
         """
         Initializes a ChargingStation object with the given attributes.
 
         :param station_id: The unique ID of the charging station.
-        :param postal_code: The postal code where the station is located.
+        :param pincode: The postal code where the station is located.
         :param latitude: The latitude of the charging station's location.
         :param longitude: The longitude of the charging station's location.
         """
         self.station_id: str = station_id
-        self.postal_code: str = postal_code
+        self.pincode: str = pincode
         self.latitude: float = latitude
         self.longitude: float = longitude
         self.feedbacks: List[str] = []
