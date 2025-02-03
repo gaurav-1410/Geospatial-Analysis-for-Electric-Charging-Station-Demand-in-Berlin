@@ -113,3 +113,4 @@ class MapService:
         :return: The Area object if found, otherwise None.
         """
         return areas.get(pincode, None)
+    
