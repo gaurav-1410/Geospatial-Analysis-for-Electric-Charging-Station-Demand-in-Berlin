@@ -19,7 +19,6 @@ class FeedbackService:
         :param feedback_text: The text of the user's feedback.
         """
         feedback_entry = {
-            "user_id": user_id,
             "name": name,
             "rating": rating,
             "feedback": feedback_text
