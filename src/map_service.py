@@ -91,19 +91,12 @@ class MapService:
             if postal_code not in areas:
                 areas[postal_code] = Area(postal_code)
 
-            # station = ChargingStation(
-            #     # Line Changed
-            #     station_id=MapService.station_id_counter,
-            #     postal_code=postal_code,
-            #     latitude=latitude,
-            #     longitude=longitude
-            # )
-
             station = ChargingStation(
-                str(MapService.station_id_counter),  # station_id
-                postal_code,  # postal_code
-                latitude,  # latitude
-                longitude  # longitude
+                # Line Changed
+                station_id=MapService.station_id_counter,
+                postal_code=postal_code,
+                latitude=latitude,
+                longitude=longitude
             )
             MapService.station_id_counter += 1
 
