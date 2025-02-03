@@ -14,7 +14,7 @@ class ChargingStation:
         self.pincode: str = pincode
         self.latitude: float = latitude
         self.longitude: float = longitude
-        self.feedbacks: List[str] = []
+        # self.feedbacks: List[str] = []
 
     def get_station_id(self) -> str:
         """
@@ -24,10 +24,10 @@ class ChargingStation:
         """
         return self.station_id
 
-    def add_feedback(self, feedback: str) -> None:
-        """
-        Adds a feedback to the list of feedbacks for the station.
+    # def add_feedback(self, feedback: str) -> None:
+    #     """
+    #     Adds a feedback to the list of feedbacks for the station.
 
-        :param feedback: A string containing the feedback to be added.
-        """
-        self.feedbacks.append(feedback)
+    #     :param feedback: A string containing the feedback to be added.
+    #     """
+    #     self.feedbacks.append(feedback)
