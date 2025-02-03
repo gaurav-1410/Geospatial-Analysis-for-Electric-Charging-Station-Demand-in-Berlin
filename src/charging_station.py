@@ -11,7 +11,7 @@ class ChargingStation:
         :param longitude: The longitude of the charging station's location.
         """
         self.station_id: str = station_id
-        self.postal_code: str = postal_code
+        self.postal_code = postal_code
         self.latitude: float = latitude
         self.longitude: float = longitude
         self.feedbacks: List[str] = []
