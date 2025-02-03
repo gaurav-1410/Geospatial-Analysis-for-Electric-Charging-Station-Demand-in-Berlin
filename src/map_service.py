@@ -92,6 +92,7 @@ class MapService:
                 areas[postal_code] = Area(postal_code)
 
             station = ChargingStation(
+                # Line Changed
                 station_id=str(MapService.station_id_counter),
                 postal_code=postal_code,
                 latitude=latitude,
