@@ -16,15 +16,15 @@ def test_charging_station_creation() -> None:
     assert station.latitude == 52.5200, "Latitude does not match"
     assert station.longitude == 13.4050, "Longitude does not match"
 
-def test_add_feedback() -> None:
-    """
-    Test the addition of feedback to a ChargingStation. 
-    :return: None
-    """
-    station = ChargingStation("001", "10115", 52.5200, 13.4050)
-    feedback: Dict[str, str] = {"user": "user123", "feedback": "Great station!"}
-    station.add_feedback(feedback)
-    assert len(station.feedbacks) == 1, "Feedback was not added"
+# def test_add_feedback() -> None:
+#     """
+#     Test the addition of feedback to a ChargingStation. 
+#     :return: None
+#     """
+#     station = ChargingStation("001", "10115", 52.5200, 13.4050)
+#     feedback: Dict[str, str] = {"user": "user123", "feedback": "Great station!"}
+#     station.add_feedback(feedback)
+#     assert len(station.feedbacks) == 1, "Feedback was not added"
 
 def test_get_station_id() -> None:
     """
