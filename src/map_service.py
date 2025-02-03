@@ -100,11 +100,11 @@ class MapService:
             # )
 
             station = ChargingStation(
-            str(MapService.station_id_counter),  # station_id
-            postal_code,  # postal_code
-            latitude,  # latitude
-            longitude  # longitude
-)
+                str(MapService.station_id_counter),  # station_id
+                postal_code,  # postal_code
+                latitude,  # latitude
+                longitude  # longitude
+            )
             MapService.station_id_counter += 1
 
             areas[postal_code].add_charging_station(station)
