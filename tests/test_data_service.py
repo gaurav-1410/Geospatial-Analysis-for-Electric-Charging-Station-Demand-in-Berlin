@@ -5,7 +5,7 @@ import pandas as pd
 from unittest import mock
 from typing import Tuple
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
-from src.data_service import DataService
+from src.Infrastructure.data_service import DataService
 
 def test_load_data_real() -> None:
     """

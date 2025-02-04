@@ -1,8 +1,10 @@
 import streamlit as st
 import folium
-from data_service import DataService
-from feedback import FeedbackService
-from map_service import MapService
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
+from Infrastructure.data_service import DataService
+from Application.feedback import FeedbackService
+from Application.map_service import MapService
 import geopandas as gpd
 import pandas as pd
 from streamlit_folium import st_folium

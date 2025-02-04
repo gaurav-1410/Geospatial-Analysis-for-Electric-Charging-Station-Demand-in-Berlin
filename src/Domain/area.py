@@ -1,5 +1,5 @@
 from typing import List, Optional
-from charging_station import ChargingStation
+from Domain.charging_station import ChargingStation
 
 class Area:
     def __init__(self, postal_code: str) -> None:

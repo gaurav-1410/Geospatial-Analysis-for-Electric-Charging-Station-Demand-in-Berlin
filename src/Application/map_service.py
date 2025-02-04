@@ -1,9 +1,9 @@
 import folium
 from branca.colormap import LinearColormap
-from charging_station import ChargingStation
+from Domain.charging_station import ChargingStation
 import geopy.distance
 import pandas as pd
-from area import Area
+from Domain.area import Area
 from typing import Dict, Optional
 
 class MapService:
@@ -80,7 +80,7 @@ class MapService:
         :param data: The DataFrame containing charging station data.
         :return: A dictionary where the keys are postal codes and the values are Area objects.
         """
-        from area import Area
+        from Domain.area import Area
         areas: Dict[str, Area] = {}
 
         for _, row in data.iterrows():

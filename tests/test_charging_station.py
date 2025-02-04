@@ -2,7 +2,7 @@ import sys
 import os
 from unittest import mock
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
-from src.charging_station import ChargingStation
+from src.Domain.charging_station import ChargingStation
 from typing import Dict
 
 def test_charging_station_creation() -> None:

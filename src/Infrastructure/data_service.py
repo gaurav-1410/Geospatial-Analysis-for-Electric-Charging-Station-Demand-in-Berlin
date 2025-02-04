@@ -18,8 +18,8 @@ class DataService:
         root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         
         # Construct absolute paths
-        processed_data_path = os.path.join(root_dir, "datasets", "processed_data.csv")
-        geo_data_path = os.path.join(root_dir, "datasets", "geodata_berlin_plz.csv")
+        processed_data_path = os.path.join(root_dir, "../datasets", "processed_data.csv")
+        geo_data_path = os.path.join(root_dir, "../datasets", "geodata_berlin_plz.csv")
         
         # Load the datasets
         data: pd.DataFrame = pd.read_csv(processed_data_path)

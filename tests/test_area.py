@@ -1,8 +1,8 @@
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
-from src.area import Area
-from src.charging_station import ChargingStation
+from src.Domain.area import Area
+from src.Domain.charging_station import ChargingStation
 from typing import Optional
 
 def test_area_creation() -> None:
